@@ -1,33 +1,18 @@
-# ワークフロー名の設定
-name: github-actions-demo.yml
-
-# トリガーの設定
-# この場合は backend ディレクトリ配下に変更が加えたコミットが main ブランチにプッシュされた場合にワークフローを実行する。
-on:
-  push:
-    branches:  # パターンとブランチ名が一致した場合に実行する
-      - main
-    paths:     # パターンとパスが一致した場合に実行する
-      - backend/**
-
-# ジョブの設定
+name: GitHub Actions Demo
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push]
 jobs:
-  example-job:                                 # 一意のジョブ ID
-    runs-on: ubuntu-20.04                      # ランナーの設定
-    env:                                       # ステップ間で共有する環境変数の設定
-      GREETING: Hello
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code                    # ステップ名の設定
-        uses: actions/checkout@v2              # アクションを実行する
-      - name: Set up Go
-        uses: actions/setup-go@v2
-        with:
-          go-version: 1.17.1
-      - name: Show Go version
-        run: go version                        # コマンドを実行する
-        working-directory: ./backend           # ワーキングディレクトリの設定
-      - name: Greeting
-        run: echo "$GREETING $FIRST_NAME $LAST_NAME"
-        env:                                   # 環境変数の設定
-          FIRST_NAME: Satoshi
-          LAST_NAME: ${{ secrets.LAST_NAME }}  # 秘密情報の読み出し
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+      - run: echo "🍏 This job's status is ${{ job.status }}."
