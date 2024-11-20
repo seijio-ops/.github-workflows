@@ -5,6 +5,10 @@ jobs:
     name: Use Linux commands
     runs-on: ubuntu-20.04
     steps:
+      - name: show login user
+        run: whoami
+      - name: show last user
+        run: last
       - name: Show ubuntu details
         run: lsb_release -a
       - name: Inspect files before checkout
