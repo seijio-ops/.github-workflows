@@ -12,17 +12,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Setup Go ${{ matrix.go-version }}
+      - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: ${{ matrix.go-version }}
-      # You can test your matrix by printing the current Go version
-      - name: Display Go version
-        run: go version
-
-      - name: Setup Go 1.21.test
-        uses: actions/setup-go@v5
-        with:
-          # Semantic version range syntax or exact version of Go
           go-version: '1.21.x'
+      - name: Install dependencies
+        run: |
+          go get .
+          go get example.com/octo-examplemodule
+          go get example.com/octo-examplemodule@v1.3.4
+
 
