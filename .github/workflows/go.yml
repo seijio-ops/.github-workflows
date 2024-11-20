@@ -20,7 +20,7 @@ jobs:
       - name: Display Go version
         run: go version
 
-      - name: Setup Go 1.21.x
+      - name: Setup Go 1.21.test
         uses: actions/setup-go@v5
         with:
           # Semantic version range syntax or exact version of Go
